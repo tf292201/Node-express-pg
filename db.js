@@ -1,12 +1,23 @@
 const { Client } = require("pg");
 
-const client = new Client({
-    user: "tf292201",         // Username
-    password: "password",     // Password
-    host: "localhost",        // Hostname (optional, defaults to localhost)
-    database: "biztime",      // Database name
-    port: 5432,               // Port number (optional, defaults to 5432)
-});
+let client;
+
+if (process.env.NODE_ENV === "test") {
+    client = new Client({user: "test",
+    password: "K00rus3e4!",
+    host: "localhost",
+    database: "biztime_test",
+    port: 5432
+    });
+} else {
+    client = new Client({
+        user: "tf292201",
+        password: "password",
+        host: "localhost",
+        database: "biztime",
+        port: 5432
+    });
+}
 
 client.connect();
 
